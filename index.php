@@ -1,5 +1,6 @@
 <?php
  require_once('function.php');
+ require_once('connect.php');
 
 $is_auth = rand(0, 1);
 
@@ -7,7 +8,7 @@ $my_time = timer();
 
 $user_name = 'Екатерина';
 
-$categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+/*$categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 
 $ads = [
     [
@@ -49,7 +50,7 @@ $ads = [
         'URL' => 'img/lot-6.jpg'
 
     ]
-];
+];*/
 
 
 $page_content = include_template('index.php', ['ads' => $ads, 'categories' => $categories, 'my_time' => $my_time]);
