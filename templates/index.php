@@ -6,7 +6,7 @@
         <?php foreach ($categories as $category): ?>
 
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html"><?= htmlspecialchars($category); ?></a>
+                <a class="promo__link" href="pages/all-lots.html"><?= htmlspecialchars($category['title']); ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -20,15 +20,15 @@
         <?php foreach ($ads as $ad) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?= htmlspecialchars($ad['URL']); ?>" width="350" height="260" alt="">
+                    <img src="<?= htmlspecialchars($ad['user_file']); ?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category"><?= htmlspecialchars($ad['Категория']); ?></span>
-                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= htmlspecialchars($ad['Название']); ?></a></h3>
+                    <span class="lot__category"><?= htmlspecialchars($ad['category']); ?></span>
+                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= htmlspecialchars($ad['title']); ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?= htmlspecialchars(is_formatting_price($ad['Цена'])); ?></span>
+                            <span class="lot__cost"><?= htmlspecialchars(is_formatting_price($ad['price'])); ?></span>
                         </div>
                         <div class="lot__timer timer">
                             <?= htmlspecialchars($my_time);?>
