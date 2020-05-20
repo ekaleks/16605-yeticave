@@ -16,8 +16,7 @@ $ads = get_open_new_lots($connect, $status);
 
 $page_content = include_template('index.php', ['ads' => $ads, 'categories' => $categories, 'my_time' => $my_time]);
 
-$layout = include_template('layout.php',
-['content' => $page_content, 'title' => 'Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
+$layout = include_template('layout.php', ['content' => $page_content, 'title' => 'Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
 
 print($layout);
 

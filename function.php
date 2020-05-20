@@ -91,7 +91,21 @@ function get_category($connect)
 function get_open_new_lots($connect, $data)
 {
     $data = [$data];
-    $sql_query = 'SELECT date_creation, l.title, c.title AS category, user_file, starting_price AS price FROM lots l JOIN categories c ON l.category_id = c.id WHERE status = ? ORDER BY date_creation DESC';
+    $sql_query = 'SELECT l.id, date_creation, l.title, c.title AS category, user_file, starting_price AS price FROM lots l JOIN categories c ON l.category_id = c.id WHERE status = ? ORDER BY date_creation DESC';
+    $stmt = db_get_prepare_stmt($connect, $sql_query, $data);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result) {
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    return $result;
+};
+
+function get_lots_for_ld($connect, $data)
+{
+    $data = [$data];
+    $sql_query = 'SELECT l.id, date_creation, l.title, c.title AS category, user_file, starting_price AS price, bid_step, description_lot FROM lots l JOIN categories c ON l.category_id = c.id WHERE l.id = ?';
     $stmt = db_get_prepare_stmt($connect, $sql_query, $data);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
