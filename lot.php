@@ -4,8 +4,6 @@ require_once('connect.php');
 
 $is_auth = rand(0, 1);
 
-$my_time = timer();
-
 $user_name = 'Екатерина';
 
 $title = null;
@@ -27,7 +25,9 @@ $ads = $result_sql;
 
 foreach ($ads as $ad =>$value){
 $title = $value['title'];
+$my_time = timer($value['date_completion']);
 }
+
 
 $page_content = include_template('lot.php', ['ads' => $ads, 'categories' => $categories, 'my_time' => $my_time]);
 

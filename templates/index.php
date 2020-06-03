@@ -19,7 +19,7 @@
         <?php foreach ($ads as $ad) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?= htmlspecialchars($ad['user_file']); ?>" width="350" height="260" alt="">
+                    <img src="img/<?= htmlspecialchars($ad['user_file']); ?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?= htmlspecialchars($ad['category']); ?></span>
@@ -30,7 +30,7 @@
                             <span class="lot__cost"><?= htmlspecialchars(is_formatting_price($ad['price'])); ?></span>
                         </div>
                         <div class="lot__timer timer">
-                            <?= htmlspecialchars($my_time);?>
+                            <?= htmlspecialchars(timer($ad['date_completion']));?>
                         </div>
                     </div>
                 </div>
