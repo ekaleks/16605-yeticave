@@ -168,3 +168,47 @@ function put_lot_in_database($connect, $data)
 
     return $result;
 };
+
+
+/**
+ * Получает из БД список email-ов юзеров по email
+ *
+ * @param $connect Ресурс соединения
+ * @param string $data Email юзера для запроса из базы SQL
+ *
+ * @return array $result Массив юзеров
+ */
+function get_email_for_user($connect, $data)
+{
+    $data = [$data];
+    $sql_query = 'SELECT e_mail AS email FROM users WHERE e_mail = ?';
+    $stmt = db_get_prepare_stmt($connect, $sql_query, $data);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result) {
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    return $result;
+};
+
+
+/**
+ * Добавляет в БД нового юзера
+ *
+ * @param $connect Ресурс соединения
+ * @param array $data Данные для запроса из базы SQL
+ *
+ * @return bool
+ */
+function put_user_in_database($connect, $data)
+{
+    $sql_query = 'INSERT INTO users (e_mail, password, name, contacts, user_file) VALUES (?, ?, ?, ?, ?)';
+    $stmt = db_get_prepare_stmt($connect, $sql_query, $data);
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        $result = mysqli_insert_id($connect);
+    }
+
+    return $result;
+};
