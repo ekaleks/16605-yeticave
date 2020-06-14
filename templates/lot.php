@@ -32,6 +32,7 @@
                             Мин. ставка <span><?= htmlspecialchars($ad['bid_step']); ?></span>
                         </div>
                     </div>
+                    <?= $add_cost; ?>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?=htmlspecialchars($title); ?></title>
+    <title><?= htmlspecialchars($title); ?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -30,7 +30,8 @@
 
                     <?php if ($is_auth == 1) : ?>
                         <div class="user-menu__logged">
-                            <p><?=htmlspecialchars($user_name); ?></p>
+                            <p><?= htmlspecialchars($user_name); ?></p>
+                            <a href="logout.php">Выход</a>
                         </div>
                     <?php else : ?>
                         <ul class="user-menu__list">
@@ -47,7 +48,7 @@
         </header>
 
         <main class="container">
-            <?=$content; ?>
+            <?= $content; ?>
         </main>
     </div>
 

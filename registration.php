@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (trim(($_POST['password'])) === '') {
             $errors['password'] = $_POST['password'];
         }
-        if (!isset($errors['email'])) {
+        if (!isset($errors['password'])) {
             $form['password'] = $_POST['password'];
         }
     }

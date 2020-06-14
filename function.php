@@ -1,4 +1,6 @@
 <?php
+// подключение сессии
+session_start();
 
 require_once('mysql_helper.php');
 
@@ -191,6 +193,29 @@ function get_email_for_user($connect, $data)
 
     return $result;
 };
+
+/**
+ * Получает из БД юзера по email
+ *
+ * @param $connect Ресурс соединения
+ * @param string $data Email юзера для запроса из базы SQL
+ *
+ * @return array $result юзер
+ */
+function get_user_for_email($connect, $data)
+{
+    $data = [$data];
+    $sql_query = 'SELECT date_registration, e_mail AS email, name, password, user_file, contacts FROM users WHERE e_mail = ?';
+    $stmt = db_get_prepare_stmt($connect, $sql_query, $data);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result) {
+        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    return $result;
+};
+
 
 
 /**

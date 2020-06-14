@@ -2,14 +2,20 @@
 require_once('function.php');
 require_once('connect.php');
 
-$is_auth = rand(0, 1);
-
-$user_name = 'Екатерина';
-
-$status = 1;
-
 $categories = get_category($connect);
 
+$user = [];
+$user_name = [];
+$is_auth = 0;
+
+if (isset($_SESSION['user'])) {
+    $is_auth = 1;
+
+if (isset($_SESSION['user']['0']['name'])) {
+    $user_name = $_SESSION['user']['0']['name'];
+}
+
+$status = 1;
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
@@ -145,7 +151,9 @@ else{
 
   $page_content = include_template('add.php', ['categories' => $categories]);
 }
-
+} else {
+    $page_content = include_template('403.php', []);
+}
 $layout = include_template('layout.php', ['content' => $page_content, 'title' => 'Добавление лота', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
 
 print($layout);
