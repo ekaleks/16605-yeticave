@@ -70,6 +70,6 @@ else{
 
 }
 
-    $layout = include_template('layout.php', ['content' => $page_content, 'title' => 'Добавление лота', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
+    $layout = include_template('layout.php', ['content' => $page_content, 'title' => 'Вход', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
 
     print($layout);

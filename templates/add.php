@@ -51,20 +51,22 @@
         </span>
     </div>
     <div class="form__container-three">
-        <div class="form__item form__item--small<?php if (isset($errors['lot-rate']) || isset($errors['lot-rate-size'])) : ?> form__item--invalid<?php endif; ?>">
+        <div class="form__item form__item--small<?php if (isset($errors['lot-rate']) || isset($errors['lot-rate-size']) || isset($errors['lot-rate-round'])) : ?> form__item--invalid<?php endif; ?>">
             <label for="lot-rate">Начальная цена</label>
-            <input id="lot-rate" type="number" name="lot-rate" placeholder="0" value="<?= (isset($lot['starting_price'])) ? htmlspecialchars($lot['starting_price']) : ''; ?>">
+            <input id="lot-rate" type="text" name="lot-rate" placeholder="0" value="<?= (isset($lot['starting_price'])) ? htmlspecialchars($lot['starting_price']) : ''; ?>">
             <span class="form__error">
                 <?php if (isset($errors['lot-rate'])) : ?> Введите начальную цену<?php endif; ?>
-                    <?php if (isset($errors['lot-rate-size'])) : ?> Введите число большее нуля<?php endif; ?>
+                <?php if (isset($errors['lot-rate-size'])) : ?> Введите число большее нуля<?php endif; ?>
+                <?php if (isset($errors['lot-rate-round'])) : ?> Введите целое число<?php endif; ?>
             </span>
         </div>
-        <div class="form__item form__item--small<?php if (isset($errors['lot-step']) || isset($errors['lot-step-size'])) : ?> form__item--invalid<?php endif; ?>">
+        <div class="form__item form__item--small<?php if (isset($errors['lot-step']) || isset($errors['lot-step-size']) || isset($errors['lot-step-round'])) : ?> form__item--invalid<?php endif; ?>">
             <label for="lot-step">Шаг ставки</label>
-            <input id="lot-step" type="number" name="lot-step" placeholder="0" value="<?= (isset($lot['bid_step'])) ? htmlspecialchars($lot['bid_step']) : ''; ?>">
+            <input id="lot-step" type="text" name="lot-step" placeholder="0" value="<?= (isset($lot['bid_step'])) ? htmlspecialchars($lot['bid_step']) : ''; ?>">
             <span class="form__error">
                 <?php if (isset($errors['lot-step-size'])) : ?> Введите число большее нуля <?php endif; ?>
                 <?php if (isset($errors['lot-step'])) : ?> Введите шаг ставки <?php endif; ?>
+                <?php if (isset($errors['lot-step-round'])) : ?> Введите целое число <?php endif; ?>
             </span>
         </div>
         <div class="form__item<?php if (isset($errors['lot-date']) || isset($errors['lot-date-format'])) : ?> form__item--invalid<?php endif; ?>">

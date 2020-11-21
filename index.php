@@ -5,6 +5,8 @@
 $user = [];
 $is_auth = 0;
 $user_name = [];
+$status = 1;
+$my_time = null;
 
 if (isset($_SESSION['user'])) {
 
@@ -15,13 +17,27 @@ if (isset($_SESSION['user'])) {
     $user_name = $_SESSION['user']['0']['name'];
  }
 }
-$status = 1;
-
-$categories = get_category($connect);
 
 $ads = get_open_new_lots($connect, $status);
 
-$page_content = include_template('index.php', ['ads' => $ads, 'categories' => $categories]);
+foreach($ads as $ad){
+
+$my_time = timer($ad['date_completion']);
+
+if(isset($ad['id']) && $my_time < 0) {
+ update_lot_status_check($connect, $ad['id']);
+}
+
+}
+
+
+
+
+
+$categories = get_category($connect);
+
+
+$page_content = include_template('index.php', ['ads' => $ads, 'categories' => $categories,'my_time' => $my_time]);
 
 $layout = include_template('layout.php', ['content' => $page_content, 'title' => 'Главная', 'is_auth' => $is_auth, 'user' => $user, 'user_name' => $user_name, 'categories' => $categories]);
 

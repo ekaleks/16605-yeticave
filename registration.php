@@ -2,9 +2,9 @@
 require_once('function.php');
 require_once('connect.php');
 
-$is_auth = rand(0, 1);
+$is_auth = 0;
 
-$user_name = 'Екатерина';
+$user_name = null;
 
 $categories = get_category($connect);
 
@@ -136,6 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 $page_content = include_template('registration.php', ['categories' => $categories]); }
 
 $layout = include_template(
-    'layout.php', ['content' => $page_content, 'title' => 'Регистрация', 'is_auth' => $is_auth, 'user_name' => $user_name, 'categories' => $categories]);
+    'layout.php', ['content' => $page_content, 'title' => 'Регистрация', 'user_name' => $user_name, 'is_auth' => $is_auth, 'categories' => $categories]);
 
 print($layout);

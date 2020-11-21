@@ -68,7 +68,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
          $errors['lot-rate-size'] = $_POST['lot-rate'];
         }
 
-        if (!isset($errors['lot-rate']) && !isset($errors['lot-rate-size'])) {
+        if(!empty($_POST['lot-rate']) && strval(round($_POST['lot-rate'])) !== $_POST['lot-rate']) {
+            $errors['lot-rate-round'] = $_POST['lot-rate'];
+        }
+
+        if (!isset($errors['lot-rate']) && !isset($errors['lot-rate-size']) && !isset($errors['lot-rate-round'])) {
             $lot['starting_price'] = $_POST['lot-rate'];
         }
     }
@@ -82,12 +86,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $errors['lot-step-size'] = $_POST['lot-step'];
         }
 
-        if (!isset($errors['lot-step']) && !isset($errors['lot-step-size'])) {
+        if (!empty($_POST['lot-step']) && strval(round($_POST['lot-step'])) !== $_POST['lot-step']) {
+                $errors['lot-step-round'] = $_POST['lot-step'];
+        }
+
+
+        if (!isset($errors['lot-step']) && !isset($errors['lot-step-size']) || !isset($errors['lot-step-round'])) {
             $lot['bid_step'] = $_POST['lot-step'];
         }
     }
 
     if (isset($_POST['lot-date'])) {
+
         if(trim(($_POST['lot-date'])) === ''){
             $errors['lot-date'] = $_POST['lot-date'];
         }
@@ -131,6 +141,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $errors['file'] = 'Вы не загрузили файл';
     }
 
+        if (isset($_SESSION['user']['0']['id'])) {
+            $lot['creation_user_id'] = $_SESSION['user']['0']['id'];
+        }
 
     if(!count($errors)){
 
